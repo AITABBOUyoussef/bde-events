@@ -18,7 +18,7 @@ class Event extends Model
             ];
  public function admin()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class , 'user_id');
     }
 
 public function reservations()
