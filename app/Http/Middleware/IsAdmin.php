@@ -19,6 +19,6 @@ class IsAdmin
         if(Auth::check() && Auth::user()->role === 'admin' ){
   return $next($request);
         }
-       abort(403, 'Acces refuse');
+       abort(403, 'Acces refuse. Vous devez être administrateur pour voir cette page');
     }
 }
