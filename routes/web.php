@@ -8,29 +8,32 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+// ==========================================
+// 1. ESPACE ÉTUDIANT (W ay wahed connecté)
+// ==========================================
+Route::middleware(['auth', 'verified'])->group(function(){
 
-Route::get('/dashboard_Admin', function () {
-    return view('dashboard_Admin');
-})->middleware(['auth', 'verified'])->name('dashboard_Admin');
+    // Dashboard dyal l-Étudiant (Smaynah 'dashboard' 3la 9bal Breeze)
+    Route::get('/dashboard', function () {
+        return view('dashboard_student');
+    })->name('dashboard');
 
-// Route::middleware(['auth' , 'is_admin'])->prefix('admin')->group(function (){
-// Route::get('/admin/dashboard', function () {
-//     return 'sddddddddd';
-// })->name('dashboard_admin');
-
-// });
-
-Route::middleware(['auth' , 'is_admin'])->group(function () {
+    // Les routes dyal Profil
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
 
+// ==========================================
+// 2. ESPACE ADMIN (M7mi b is_admin)
+// ==========================================
+Route::middleware(['auth', 'is_admin'])->group(function () {
 
+    // Dashboard dyal l-Admin dynamique (Kay-jbed les events mn EventController)
+    Route::get('/dashboard_admin', [EventController::class, 'index'])->name('admin.dashboard');
+
+    // Routes dyal l-création, modification, etc.
     Route::resource('/events', EventController::class);
-
 
 });
 

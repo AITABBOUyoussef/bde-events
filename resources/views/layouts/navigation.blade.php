@@ -3,23 +3,33 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between h-20">
             <div class="flex">
-                <!-- Logo BDE (M'styli b l-khder) -->
+                <!-- Logo BDE -->
                 <div class="shrink-0 flex items-center">
-                    <a href="{{ route('dashboard_Admin') }}" class="flex items-center gap-2 group">
-                        <div class="w-10 h-10 bg-gradient-to-br from-green-500 to-green-700 rounded-lg flex items-center justify-center shadow-md transform transition group-hover:rotate-3">
-                            <span class="text-white font-extrabold text-xs tracking-wider">BDE</span>
+                    <!-- Charṭ: l-Lien dyal l-Logo kay-tbedel 3la 7sab chkon li connecté -->
+                    <a href="{{ Auth::user()->role === 'admin' ? route('admin.dashboard') : route('dashboard') }}" class="flex items-center gap-2 group">
+                        <div class="w-10 h-10 bg-gradient-to-br {{ Auth::user()->role === 'admin' ? 'from-gray-900 to-black border border-amber-500/50' : 'from-green-500 to-green-700' }} rounded-lg flex items-center justify-center shadow-md transform transition group-hover:rotate-3">
+                            <span class="text-white font-extrabold text-xs tracking-wider {{ Auth::user()->role === 'admin' ? 'text-amber-400' : '' }}">BDE</span>
                         </div>
                         <span class="font-extrabold text-xl text-gray-900 tracking-tight">
-                            Events<span class="text-green-600 text-2xl">.</span>
+                            Events<span class="{{ Auth::user()->role === 'admin' ? 'text-amber-500' : 'text-green-600' }} text-2xl">.</span>
                         </span>
                     </a>
                 </div>
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('dashboard_Admin')" :active="request()->routeIs('dashboard_Admin')" class="hover:text-green-600 transition font-medium">
-                        {{ __('Tableau de bord') }}
-                    </x-nav-link>
+                    @if(Auth::user()->role === 'admin')
+                        <!-- Lien dyal l-Admin -->
+                        <x-nav-link :href="route('admin.dashboard')" :active="request()->routeIs('admin.dashboard')" class="hover:text-amber-600 transition font-bold border-amber-500">
+                            {{ __('Dashboard VIP') }}
+                        </x-nav-link>
+                        <!-- T9der tzid hna liens khrin dyal l-Admin bhal "Gérer les utilisateurs" -->
+                    @else
+                        <!-- Lien dyal l-Étudiant -->
+                        <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')" class="hover:text-green-600 transition font-medium border-green-500">
+                            {{ __('Mon Espace') }}
+                        </x-nav-link>
+                    @endif
                 </div>
             </div>
 
@@ -32,7 +42,6 @@
                             <!-- VIP ADMIN BUTTON (Fakhamat) -->
                             <button class="inline-flex items-center px-4 py-2 border border-amber-500/50 rounded-full text-sm leading-4 font-bold text-amber-400 bg-gradient-to-r from-gray-900 to-black hover:from-black hover:to-gray-900 hover:shadow-lg hover:shadow-amber-500/20 focus:outline-none transition-all ease-in-out duration-300 transform hover:scale-105 group">
                                 <div class="flex items-center gap-2">
-                                    <!-- Crown Icon Dhebi -->
                                     <svg class="w-5 h-5 text-amber-400 group-hover:animate-pulse" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-11.622 9-11.622z"></path>
                                     </svg>
@@ -100,9 +109,15 @@
     <!-- Responsive Navigation Menu -->
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden bg-gray-50 border-b border-green-100 pb-4">
         <div class="pt-2 pb-3 space-y-1">
-            <x-responsive-nav-link :href="route('dashboard_Admin')" :active="request()->routeIs('dashboard_Admin')" class="focus:text-green-600 focus:border-green-500 hover:bg-green-50 hover:text-green-700">
-                {{ __('Tableau de bord') }}
-            </x-responsive-nav-link>
+            @if(Auth::user()->role === 'admin')
+                <x-responsive-nav-link :href="route('admin.dashboard')" :active="request()->routeIs('admin.dashboard')" class="focus:text-amber-600 focus:border-amber-500 hover:bg-amber-50 hover:text-amber-700 font-bold">
+                    {{ __('Dashboard VIP') }}
+                </x-responsive-nav-link>
+            @else
+                <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')" class="focus:text-green-600 focus:border-green-500 hover:bg-green-50 hover:text-green-700">
+                    {{ __('Mon Espace') }}
+                </x-responsive-nav-link>
+            @endif
         </div>
 
         <!-- Responsive Settings Options -->
