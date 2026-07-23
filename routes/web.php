@@ -39,7 +39,7 @@ Route::middleware(['auth', 'is_admin'])->group(function () {
 
     Route::get('/dashboard_admin', [EventController::class, 'index'])->name('admin.dashboard');
 
- 
+
     Route::resource('/events', EventController::class);
 
 });

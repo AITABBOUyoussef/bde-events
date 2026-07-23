@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Event;
 use App\Models\Reservation;
 use Illuminate\Http\Request;
 
@@ -17,7 +18,12 @@ class ReservationController extends Controller
         ->where('user_id',  $user_id)
         ->first();
         if($reserv){
-                
+                $place = Event::findOrFail($request->event_id);
+                $place->jauge_maximale = $place->jauge_maximale -1 ;
+                $place->save();
+                // dd($place);
+
+
 
         }
 
@@ -28,11 +34,13 @@ class ReservationController extends Controller
             'reservation_code' => $reservationCode,
         ]);
 
-        return redirect()->route('dashboard_student')
+        return redirect()->route('dashboard')
             ->with('success', 'Place réservée avec succès ! Votre code est : ' . $reservationCode);
     }
 
     public function ticket(){
+         $ticket = Event::orderBy('date', 'asc')->get();
 
+            return view('ticket', compact('ticket'));
     }
 }
