@@ -16,14 +16,8 @@ Route::get('/', function () {
 Route::middleware(['auth', 'verified'])->group(function(){
 
 
-    Route::get('/dashboard', function () {
-        $events = Event::where('date', '>=', now()->toDateString())
-                       ->orderBy('date', 'asc')
-                       ->get();
 
-        return view('dashboard_student', compact('events'));
-
-    })->name('dashboard');
+        Route::get('/dashboard', [ReservationController::class, 'index'])->name('dashboard');
  Route::resource('/reservations', ReservationController::class);
     // Les routes  Profil
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
