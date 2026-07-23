@@ -29,10 +29,10 @@
                         <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')" class="hover:text-green-600 transition font-medium border-green-500">
                             {{ __('Mon Espace') }}
                         </x-nav-link>
-                        <x-nav-link :href="route('reservations.store')" :active="request()->routeIs('reservations.store')" class="hover:text-green-600 transition font-medium border-green-500">
+                        <x-nav-link :href="route('my.tickets')" :active="request()->routeIs('my.tickets')" class="hover:text-green-600 transition font-medium border-green-500">
                             {{ __('Mon Ticket') }}
                         </x-nav-link>
-                       
+
                     @endif
                 </div>
             </div>
