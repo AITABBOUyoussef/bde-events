@@ -12,8 +12,16 @@ class ReservationController extends Controller
           $request->validate([
             'event_id' => 'required|exists:events,id',
         ]);
-$reservationCode = 'RES-' . time();
-        $user_id = $request->user()->id;
+         $user_id = $request->user()->id;
+        $reserv = Reservation::where('event_id', $request->event_id)
+        ->where('user_id',  $user_id)
+        ->first();
+        if($reserv){
+                
+
+        }
+
+            $reservationCode = 'RES-' . time();
             Reservation::create([
             'event_id' => $request->event_id,
             'user_id' => $user_id,
@@ -22,5 +30,9 @@ $reservationCode = 'RES-' . time();
 
         return redirect()->route('dashboard_student')
             ->with('success', 'Place réservée avec succès ! Votre code est : ' . $reservationCode);
+    }
+
+    public function ticket(){
+
     }
 }
