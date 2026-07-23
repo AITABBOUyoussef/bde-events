@@ -29,6 +29,12 @@
                         <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')" class="hover:text-green-600 transition font-medium border-green-500">
                             {{ __('Mon Espace') }}
                         </x-nav-link>
+                          <a href="{{ route('reservations.store') }}" class="bg-gradient-to-r from-gray-900 to-black hover:from-black hover:to-gray-900 text-amber-400 border border-amber-500/50 font-bold py-2 px-5 rounded-lg shadow-md transition-all duration-300 ease-in-out transform hover:scale-105 flex items-center group">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 group-hover:animate-pulse" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" clip-rule="evenodd" />
+                </svg>
+                Mon ticket
+            </a>
                     @endif
                 </div>
             </div>

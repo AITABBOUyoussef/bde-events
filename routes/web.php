@@ -18,6 +18,7 @@ Route::middleware(['auth', 'verified'])->group(function(){
 
 
         Route::get('/dashboard', [ReservationController::class, 'index'])->name('dashboard');
+        // Route::get('/dashboard', [ReservationController::class, 'index'])->name('dashboard_ticket');
  Route::resource('/reservations', ReservationController::class);
     // Les routes  Profil
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
