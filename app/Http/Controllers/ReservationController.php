@@ -30,8 +30,6 @@ class ReservationController extends Controller
         $reserv = Reservation::where('event_id', $request->event_id)
             ->where('user_id',  $user_id)
             ->first();
-
-
         if ($place->jauge_maximale <= 0) {
 
             return redirect()->route('dashboard')
@@ -41,7 +39,8 @@ class ReservationController extends Controller
         if ($reserv) {
             $ticket = $place;
             $Code = $reserv->reservation_code;
-            return view('ticket', compact('ticket', 'Code'));
+            // return view('ticket', compact('ticket', 'Code'));
+            return view('dashboard_ticket', compact('ticket', 'Code'));
         }
 
         $place->jauge_maximale = $place->jauge_maximale - 1;
