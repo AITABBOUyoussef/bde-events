@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ReservationController;
+use App\Models\Event;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -15,9 +17,14 @@ Route::middleware(['auth', 'verified'])->group(function(){
 
     // Dashboard dyal l-Étudiant (Smaynah 'dashboard' 3la 9bal Breeze)
     Route::get('/dashboard', function () {
-        return view('dashboard_student');
-    })->name('dashboard');
+        $events = Event::where('date', '>=', now()->toDateString())
+                       ->orderBy('date', 'asc')
+                       ->get();
 
+        return view('dashboard_student', compact('events'));
+
+    })->name('dashboard');
+ Route::resource('/reservations', ReservationController::class);
     // Les routes dyal Profil
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');

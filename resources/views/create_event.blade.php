@@ -89,7 +89,7 @@
                         <!-- Boutons d'action -->
                         <div class="flex items-center justify-end gap-4 pt-6 border-t border-gray-100">
                             <!-- Bouton Annuler -->
-                            <a href="{{ route('dashboard_Admin') }}" class="px-6 py-3 text-sm font-bold text-gray-600 bg-white border border-gray-300 rounded-xl hover:bg-gray-50 hover:text-gray-900 transition-all">
+                            <a href="{{ route('admin.dashboard') }}" class="px-6 py-3 text-sm font-bold text-gray-600 bg-white border border-gray-300 rounded-xl hover:bg-gray-50 hover:text-gray-900 transition-all">
                                 Annuler
                             </a>
 
