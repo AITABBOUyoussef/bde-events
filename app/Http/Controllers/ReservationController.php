@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Event;
 use App\Models\Reservation;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ReservationController extends Controller
 {
@@ -57,7 +58,7 @@ class ReservationController extends Controller
     }
     public function myTickets()
     {
-        $userId = auth()->id();
+        $userId = Auth::id();
 
         $reservations = Reservation::with('event')
             ->where('user_id', $userId)
