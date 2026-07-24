@@ -6,23 +6,23 @@ use Illuminate\Database\Eloquent\Model;
 
 class Event extends Model
 {
-        protected $fillable = [
-            'titre',
-            'description',
-            'date',
-            'heure',
-            'lieu',
-            'prix',
-            'jauge_maximale',
+    protected $fillable = [
+        'titre',
+        'description',
+        'date',
+        'heure',
+        'lieu',
+        'prix',
+        'jauge_maximale',
 
-            ];
- public function admin()
+    ];
+    public function admin()
     {
-        return $this->belongsTo(User::class , 'user_id');
+        return $this->belongsTo(User::class, 'user_id');
     }
 
-public function reservations()
+    public function reservations()
     {
-         return $this->hasMany(Reservation::class);
+        return $this->hasMany(Reservation::class);
     }
-            }
+}

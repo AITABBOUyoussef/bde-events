@@ -16,9 +16,9 @@ class IsAdmin
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if(Auth::check() && Auth::user()->role === 'admin' ){
-  return $next($request);
+        if (Auth::check() && Auth::user()->role === 'admin') {
+            return $next($request);
         }
-       abort(403, 'Acces refuse. Vous devez être administrateur pour voir cette page');
+        abort(403, 'Acces refuse. Vous devez être administrateur pour voir cette page');
     }
 }

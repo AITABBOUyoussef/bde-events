@@ -13,14 +13,14 @@ Route::get('/', function () {
 // ==========================================
 // 1. ESPACE ÉTUDIANT
 // ==========================================
-Route::middleware(['auth', 'verified'])->group(function(){
+Route::middleware(['auth', 'verified'])->group(function () {
 
 
 
-        Route::get('/dashboard', [ReservationController::class, 'index'])->name('dashboard');
-        // Route::get('/dashboard', [ReservationController::class, 'index'])->name('dashboard_ticket');
- Route::resource('/reservations', ReservationController::class);
- Route::get('/my-tickets', [ReservationController::class, 'myTickets'])->name('my.tickets');
+    Route::get('/dashboard', [ReservationController::class, 'index'])->name('dashboard');
+    // Route::get('/dashboard', [ReservationController::class, 'index'])->name('dashboard_ticket');
+    Route::resource('/reservations', ReservationController::class);
+    Route::get('/my-tickets', [ReservationController::class, 'myTickets'])->name('my.tickets');
     // Les routes  Profil
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
@@ -37,7 +37,6 @@ Route::middleware(['auth', 'is_admin'])->group(function () {
 
 
     Route::resource('/events', EventController::class);
-
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

@@ -47,15 +47,14 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
-     public function events()
+    public function events()
     {
         return $this->hasMany(User::class);
     }
 
 
-public function reservations()
+    public function reservations()
     {
         return $this->hasMany(Reservation::class);
     }
-
 }

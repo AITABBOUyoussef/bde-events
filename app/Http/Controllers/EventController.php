@@ -3,24 +3,22 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Event; // Darouri tzid hadi bach Laravel y3ref l-Model Event
-use Illuminate\Support\Facades\Auth; // Darouri tzid hadi bach njibou l-ID dyal l-Admin
+use App\Models\Event;
+use Illuminate\Support\Facades\Auth;
 
 class EventController extends Controller
 {
-    public function index(){
-            $events = Event::orderBy('date', 'asc')->get();
+    public function index()
+    {
+        $events = Event::orderBy('date', 'asc')->get();
 
-            return view('dashboard_Admin', compact('events'));
-
-
+        return view('dashboard_Admin', compact('events'));
     }
     public function create()
     {
-        
-        return view('create_event');
 
-     }
+        return view('create_event');
+    }
 
     public function store(Request $request)
     {
@@ -44,10 +42,10 @@ class EventController extends Controller
         $event->prix = $validatedData['prix'];
         $event->jauge_maximale = $validatedData['jauge_maximale'];
 
-       $event->user_id = Auth::id();
-// Event::create($validatedData);
+        $event->user_id = Auth::id();
+        // Event::create($validatedData);
         $event->save();
 
-       return redirect()->route('events.index')->with('success', 'L\'événement a été publié avec succès, M. l\'Administrateur !');
+        return redirect()->route('events.index')->with('success', 'L\'événement a été publié avec succès, M. l\'Administrateur !');
     }
 }

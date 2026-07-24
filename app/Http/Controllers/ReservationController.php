@@ -38,12 +38,7 @@ class ReservationController extends Controller
 
         if ($reserv) {
 
-    return redirect()->route('my.tickets')->with('error', 'Vous avez déjà réservé cet événement. Voici votre ticket !');
-
-            // $ticket = $place;
-            // $Code = $reserv->reservation_code;
-            // // return view('ticket', compact('ticket', 'Code'));
-            // return view('dashboard_ticket', compact('ticket', 'Code'));
+            return redirect()->route('my.tickets')->with('error', 'Vous avez déjà réservé cet événement. Voici votre ticket !');
         }
 
         $place->jauge_maximale = $place->jauge_maximale - 1;
@@ -60,14 +55,13 @@ class ReservationController extends Controller
         return redirect()->route('reservations.store')
             ->with('success', 'Place réservée avec succès ! Votre code est : ' . $reservationCode);
     }
-        public function myTickets()
+    public function myTickets()
     {
         $userId = auth()->id();
 
-        // Kanjibou ga3 les réservations dyal had l-user m3a l-information dyal les événements
         $reservations = Reservation::with('event')
-                            ->where('user_id', $userId)
-                            ->get();
+            ->where('user_id', $userId)
+            ->get();
 
         return view('dashboard_ticket', compact('reservations'));
     }
