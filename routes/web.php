@@ -26,7 +26,6 @@ Route::middleware(['auth', 'is_student'])->group(function () {
 
 
     Route::get('/dashboard', [ReservationController::class, 'index'])->name('dashboard');
-    // Route::get('/dashboard', [ReservationController::class, 'index'])->name('dashboard_ticket');
     Route::resource('/reservations', ReservationController::class);
     Route::get('/my-tickets', [ReservationController::class, 'myTickets'])->name('my.tickets');
 });
