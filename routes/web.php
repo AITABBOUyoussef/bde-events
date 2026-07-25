@@ -23,8 +23,6 @@ Route::middleware(['auth', 'verified'])->group(function () {
 // ==========================================
 Route::middleware(['auth', 'is_student'])->group(function () {
 
-
-
     Route::get('/dashboard', [ReservationController::class, 'index'])->name('dashboard');
     Route::resource('/reservations', ReservationController::class);
     Route::get('/my-tickets', [ReservationController::class, 'myTickets'])->name('my.tickets');

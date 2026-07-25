@@ -16,7 +16,7 @@ class IsEtudent
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (Auth::check() && Auth::user()->role === 'etudent') {
+        if (Auth::check() && Auth::user()->role === 'student') {
             return $next($request);
         }
         abort(403, 'Acces refuse.');
