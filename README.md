@@ -1,59 +1,41 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# 🎓 BDE Events Management System
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+![Laravel](https://img.shields.io/badge/Laravel-11.x-FF2D20?style=for-the-badge&logo=laravel)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css)
+![MySQL](https://img.shields.io/badge/MySQL-005C84?style=for-the-badge&logo=mysql)
+![PHP](https://img.shields.io/badge/PHP-777BB4?style=for-the-badge&logo=php)
 
-## About Laravel
+## 📝 Description
+**BDE Events** est une plateforme web complète développée pour la gestion des événements du Bureau Des Étudiants (BDE). Ce projet permet de digitaliser le processus de création des événements et la réservation des billets par les étudiants, tout en assurant une gestion stricte des places disponibles (Jauge maximale) et en évitant les surréservations.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## ✨ Fonctionnalités Principales
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+### 🛡️ Espace Administrateur (Membre BDE)
+* **CRUD des Événements :** Créer, lire, modifier et supprimer des événements (Titre, Description, Date, Heure, Lieu, Prix, Jauge maximale).
+* **Sécurité & Intégrité :** Impossibilité de supprimer un événement si des réservations sont déjà associées (Protection de la base de données).
+* **Tableau de bord :** Suivi en temps réel du nombre de réservations par événement.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+### 🎓 Espace Étudiant
+* **Réservation intelligente :** Bouton de réservation dynamique (se désactive automatiquement si l'événement est complet ou si l'étudiant a déjà réservé).
+* **Gestion des conflits (Race Condition) :** Utilisation de la méthode de décrémentation sécurisée pour garantir qu'aucune place fantôme n'est attribuée.
+* **Mes Tickets (Pass Numérique) :** Accès à un espace personnel listant les réservations "À venir" avec génération d'un code de réservation unique (ex: `RES-123456789`).
 
-## Learning Laravel
+## 🏗️ Architecture & Conception (UML)
+Le système repose sur une conception orientée objet (OOP) solide :
+* **Héritage (Generalization) :** Les entités `Admin` et `Student` héritent de la super-classe `User`, permettant de centraliser l'authentification tout en séparant les logiques métiers (Création d'événements vs Réservation).
+* **Base de données relationnelle :** Utilisation du système de contraintes et des jointures SQL pour lier les utilisateurs, les événements et les réservations.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
+## 🚀 Technologies Utilisées
+* **Backend :** Laravel 11 (PHP)
+* **Frontend :** Blade, Tailwind CSS, JavaScript
+* **Base de données :** MySQL
+* **Authentification :** Laravel Breeze (Architecture Multi-Rôles avec Middlewares personnalisés `is_admin` et `is_student`)
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+## 🛠️ Installation en Local (Pour le Jury)
 
-## Laravel Sponsors
+Suivez ces étapes pour lancer le projet sur votre machine locale :
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
-
-### Premium Partners
-
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
-
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+**1. Cloner le dépôt :**
+```bash
+git clone [https://github.com/votre-nom-utilisateur/bde-events.git](https://github.com/votre-nom-utilisateur/bde-events.git)
+cd bde-events
