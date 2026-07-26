@@ -21,7 +21,7 @@
     <div class="py-12 bg-gray-50 min-h-screen">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
 
-            <!-- Message de Succès (Mli kay-tzad chi événement) -->
+            <!-- Message de Succès  -->
             @if (session('success'))
                 <div class="mb-6 bg-green-100 border-l-4 border-green-500 text-green-700 p-4 rounded-r-lg shadow-sm"
                     role="alert">
@@ -41,14 +41,8 @@
                         <div class="mt-2 text-3xl font-extrabold text-gray-900">{{ $events->count() }}</div>
                     </div>
                 </div>
-                <!-- Stat Card 2 (Ghat-kdem mli n-saybo les réservations) -->
-                <div
-                    class="bg-white overflow-hidden shadow sm:rounded-xl border-l-4 border-green-500 transition hover:shadow-lg opacity-75">
-                    <div class="p-6">
-                        <div class="text-green-500 text-xs font-bold uppercase tracking-wider">Total Réservations</div>
-                        <div class="mt-2 text-3xl font-extrabold text-gray-900">À venir</div>
-                    </div>
-                </div>
+
+
             </div>
 
             <!-- Tableau de Suivi Dynamique (US 1.2) -->
@@ -74,7 +68,7 @@
                         </thead>
                         <tbody class="divide-y divide-gray-100">
 
-                            <!-- Boucle 3la les événements mn l-Base de données -->
+                        
                             @forelse ($events as $event)
                                 <tr class="hover:bg-gray-50 transition duration-150">
                                     <td class="px-6 py-4 whitespace-nowrap">

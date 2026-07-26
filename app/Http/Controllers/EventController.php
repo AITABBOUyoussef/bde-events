@@ -48,4 +48,6 @@ class EventController extends Controller
 
         return redirect()->route('events.index')->with('success', 'L\'événement a été publié avec succès, M. l\'Administrateur !');
     }
+
+    
 }

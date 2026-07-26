@@ -78,7 +78,7 @@
                     </div>
                 </div>
 
-                <!-- SEPARATEUR (L-khet m9te3 bhal ticket dyal bsseh) -->
+                <!-- SEPARATEUR -->
                 <div class="relative flex items-center px-4">
                     <div class="h-6 w-6 bg-gray-50 rounded-full absolute -left-3 shadow-inner"></div>
                     <div class="h-6 w-6 bg-gray-50 rounded-full absolute -right-3 shadow-inner"></div>

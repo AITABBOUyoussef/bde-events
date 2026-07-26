@@ -22,7 +22,6 @@ Route::middleware(['auth', 'verified'])->group(function () {
 // 1. ESPACE ÉTUDIANT
 // ==========================================
 Route::middleware(['auth', 'is_student'])->group(function () {
-
     Route::get('/dashboard', [ReservationController::class, 'index'])->name('dashboard');
     Route::resource('/reservations', ReservationController::class);
     Route::get('/my-tickets', [ReservationController::class, 'myTickets'])->name('my.tickets');
@@ -32,11 +31,7 @@ Route::middleware(['auth', 'is_student'])->group(function () {
 // 2. ESPACE ADMIN
 // ==========================================
 Route::middleware(['auth', 'is_admin'])->group(function () {
-
-
     Route::get('/dashboard_admin', [EventController::class, 'index'])->name('admin.dashboard');
-
-
     Route::resource('/events', EventController::class);
 });
 
