@@ -18,11 +18,11 @@ Ce projet permet au BDE de créer des événements avec des capacités limitées
 
 ### UML Class Diagram
 
-![UML Class Diagram](./public/BDE%20UML.png)
+![UML Class Diagram](./public//BDE%20UML.png)
 
 ### UML Use Case Diagram
 
-![UML Use Case Diagram](./public/BDE%20use%20casse.png)
+![UML Use Case Diagram](./public//BDE%20use%20casse.png)
 
 ---
 
