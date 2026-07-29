@@ -12,6 +12,7 @@ class EventController extends Controller
     {
         $events = Event::orderBy('date', 'asc')->get();
 
+
         return view('dashboard_Admin', compact('events'));
     }
     public function create()
@@ -49,5 +50,5 @@ class EventController extends Controller
         return redirect()->route('events.index')->with('success', 'L\'événement a été publié avec succès, M. l\'Administrateur !');
     }
 
-    
+
 }

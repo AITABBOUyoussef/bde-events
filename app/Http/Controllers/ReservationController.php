@@ -2,20 +2,27 @@
 
 namespace App\Http\Controllers;
 
+use App\Services\UserService;
+
 use App\Models\Event;
 use App\Models\Reservation;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+
+use function Laravel\Prompts\select;
 
 class ReservationController extends Controller
 {
-    public function index()
+    public function index( UserService $userService)
     {
-        $events = Event::where('date', '>=', now()->toDateString())
-            ->orderBy('date', 'asc')
-            ->get();
+        // $events = Event::where('date', '>=', now()->toDateString())
+        //     ->orderBy('date', 'asc')
+        //     ->get();
 
-        return view('dashboard_student', compact('events'));
+        $events = $userService->getuser();
+dd($events);
+        // return view('dashboard_student', compact('events'));
     }
 
     public function store(Request $request)
@@ -66,4 +73,6 @@ class ReservationController extends Controller
 
         return view('dashboard_ticket', compact('reservations'));
     }
+
+    
 }
