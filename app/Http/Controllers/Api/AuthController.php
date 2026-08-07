@@ -35,4 +35,11 @@ return response()->json([
         ],401);
     }
     }
+    public function logout(Request $request){
+        $request->user()->currentAccessToken()->delete();
+        return response()->json([
+            'success' => true,
+            'message' => 'Déconnexion réussie.'
+        ], 200);
+    }
 }
