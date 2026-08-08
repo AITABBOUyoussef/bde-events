@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\EventController;
+use App\Http\Controllers\Api\ReservationController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -15,14 +16,14 @@ Route::middleware(['auth:sanctum'])->group(function () {
 // ==========================================
 Route::middleware(['is_student'])->group(function () {
 
-     Route::get('/events', [EventController::class, 'index']);
+     Route::get('/reservations', [ReservationController::class, 'index']);
 
 });
 // ==========================================
 // 2. ESPACE ADMIN
 // ==========================================
 Route::middleware(['is_admin'])->group(function () {
-    //  Route::get('/events', [EventController::class, 'index']);
+     Route::get('/events', [EventController::class, 'index']);
 
 });
 
