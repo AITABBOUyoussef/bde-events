@@ -9,4 +9,5 @@ class EventService
 public function getAllEvents(){
     return Event::orderBy('date','asc')->get();
 }
+
 }
