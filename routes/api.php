@@ -17,6 +17,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
 Route::middleware(['is_student'])->group(function () {
 
      Route::get('/reservations', [ReservationController::class, 'index']);
+     Route::get('/tickets', [ReservationController::class, 'mytickets']);
      Route::post('/reserv', [ReservationController::class, 'store']);
 
 });

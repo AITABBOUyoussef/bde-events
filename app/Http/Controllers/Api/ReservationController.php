@@ -63,7 +63,14 @@ $this->ReservationService=$ReservationService;
         ],401);
         }
     }
-
+public  function mytickets(){
+    $tickets = $this->ReservationService->tickets();
+    return response()->json([
+          'success'=>true,
+            'message'=>'Liste des Tickes récupérée avec succès',
+            'data'=>$tickets
+              ],200);
+}
     /**
      * Display the specified resource.
      */

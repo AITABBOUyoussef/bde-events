@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Models\Event;
 use App\Models\Reservation;
 use Exception;
+use Illuminate\Support\Facades\Auth;
 use Symfony\Component\Process\ExecutableFinder;
 
 class ReservationService
@@ -41,6 +42,14 @@ class ReservationService
         $place->decrement('jauge_maximale');
          return $reservation ;
 
+
+    }
+    public function tickets()
+    {
+ $userId = Auth::id();
+  return  Reservation::with('event')
+            ->where('user_id', $userId)
+            ->get();
 
     }
 }
