@@ -4,7 +4,10 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Services\EventService;
+use Exception;
+use GrahamCampbell\ResultType\Success;
 use Illuminate\Http\Request;
+use Mockery\Expectation;
 
 class EventController extends Controller
 {
@@ -24,7 +27,7 @@ class EventController extends Controller
             'success'=>true,
             'message'=>'Liste des événements récupérée avec succès',
             'data'=>$events
-        ],200); 
+        ],200);
     }
 
     /**
@@ -32,7 +35,29 @@ class EventController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        $validatedData = $request->validate([
+            'titre' => 'required|string|max:255',
+            'description' => 'required|string',
+            'date' => 'required|date|after_or_equal:today',
+            'heure' => 'required',
+            'lieu' => 'required|string|max:255',
+            'prix' => 'required|numeric|min:0',
+            'jauge_maximale' => 'required|integer|min:1',
+        ]);
+        try {
+            $result=$this->eventService->addEvents($validatedData);
+            return response()->json([
+                'success' =>true,
+                'event' => $result['event']
+            ],200);
+        }
+        catch(Exception $e){
+             return response()->json([
+            'success'=>false,
+            'message'=>$e->getMessage()
+        ],401);
+        }
     }
 
     /**

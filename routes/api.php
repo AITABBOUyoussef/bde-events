@@ -24,6 +24,7 @@ Route::middleware(['is_student'])->group(function () {
 // ==========================================
 Route::middleware(['is_admin'])->group(function () {
      Route::get('/events', [EventController::class, 'index']);
+     Route::post('/add-event', [EventController::class, 'store']);
 
 });
 
