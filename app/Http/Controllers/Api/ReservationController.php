@@ -3,7 +3,10 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\Event;
+use App\Models\Reservation;
 use App\Services\ReservationService;
+use Exception;
 use Illuminate\Http\Request;
 
 class ReservationController extends Controller
@@ -25,15 +28,40 @@ $this->ReservationService=$ReservationService;
             'message'=>'Liste des événements récupérée avec succès',
             'data'=>$events
         ],200);
-    
+
     }
+
 
     /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
     {
-        //
+
+         $validatedData = $request->validate([
+             'event_id' => 'required|exists:events,id',
+
+         ]);
+  $validatedData['user_id'] = $request->user()->id;
+
+
+          try {
+            $reservation=$this->ReservationService->reservation($validatedData);
+
+            return response()->json([
+                'success' =>true,
+             'message'     => 'Réservation effectuée avec succès!',
+            'reservation' => $reservation
+            ],200);
+
+
+        }
+         catch(Exception $e){
+             return response()->json([
+            'success'=>false,
+            'message'=>$e->getMessage()
+        ],401);
+        }
     }
 
     /**
