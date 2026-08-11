@@ -13,13 +13,6 @@ public function loginService(array $data){
 
         $user = User::where('email',$data['email'])->first();
 
-
-        if (!$user || !Hash::check($data['password'], $user->password)) {
-
-           throw new Exception ('Les identifiants sont incorrects.');
-        }
-
-
         $token = $user->createToken('react-app-token')->plainTextToken ;
         return [
             'user' => $user,

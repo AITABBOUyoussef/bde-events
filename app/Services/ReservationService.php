@@ -6,7 +6,26 @@ use App\Models\Event;
 use App\Models\Reservation;
 use Exception;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Symfony\Component\Process\ExecutableFinder;
+
+use function Laravel\Prompts\select;
+
+class EventDto{
+        protected $fillable = [
+        'titre',
+        'description',
+        'date',
+        'heure',
+        'lieu',
+        'prix',
+        'jauge_maximale',
+        'eventId',
+        'user_id'
+
+    ];
+}
+
 
 class ReservationService
 {
@@ -17,6 +36,19 @@ class ReservationService
   return Event::where('date', '>=', now()->toDateString())
             ->orderBy('date', 'asc')
             ->get();
+    }
+
+      public function isReserve(){
+ $events = DB::table('events as e')
+    ->leftJoin('reservations', 'reservations.event_id', '=', 'e.id')
+    ->select(
+        'e.*',
+        'reservations.user_id as reserveBy',
+        'reservations.event_id'
+    )
+    ->get();
+
+         return    $events   ;
     }
     public function reservation(array $data){
          $user_id = $data['user_id'];
@@ -39,8 +71,13 @@ class ReservationService
             'user_id' => $user_id,
             'reservation_code' => $reservationCode,
          ]);
+             $userReservation = \App\Models\Reservation::where('event_id', $data['event_id'])
+                            ->where('user_id', Auth::id())
+                            ->first();
         $place->decrement('jauge_maximale');
-         return $reservation ;
+
+         return [ 'reservation' => $reservation ,
+       'userReservation' => $userReservation  ] ;
 
 
     }

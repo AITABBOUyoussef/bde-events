@@ -22,7 +22,7 @@ $this->ReservationService=$ReservationService;
     }
     public function index()
     {
-    $events=$this->ReservationService->getEvents();
+    $events=$this->ReservationService->isReserve();
     return response()->json([
          'success'=>true,
             'message'=>'Liste des événements récupérée avec succès',
@@ -51,7 +51,9 @@ $this->ReservationService=$ReservationService;
             return response()->json([
                 'success' =>true,
              'message'     => 'Réservation effectuée avec succès!',
-            'reservation' => $reservation
+            'reservation' => $reservation['reservation'],
+            'userReservation' => $reservation['userReservation'],
+
             ],200);
 
 
