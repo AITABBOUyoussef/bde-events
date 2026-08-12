@@ -11,20 +11,6 @@ use Symfony\Component\Process\ExecutableFinder;
 
 use function Laravel\Prompts\select;
 
-class EventDto{
-        protected $fillable = [
-        'titre',
-        'description',
-        'date',
-        'heure',
-        'lieu',
-        'prix',
-        'jauge_maximale',
-        'eventId',
-        'user_id'
-
-    ];
-}
 
 
 class ReservationService
@@ -74,7 +60,7 @@ class ReservationService
              $userReservation = \App\Models\Reservation::where('event_id', $data['event_id'])
                             ->where('user_id', Auth::id())
                             ->first();
-        $place->decrement('jauge_maximale');
+        $place->decrement('places_restantes');
 
          return [ 'reservation' => $reservation ,
        'userReservation' => $userReservation  ] ;

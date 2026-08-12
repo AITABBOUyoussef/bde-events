@@ -19,11 +19,12 @@ public function addEvents(array $data){
         $event->lieu = $data['lieu'];
         $event->prix = $data['prix'];
         $event->jauge_maximale = $data['jauge_maximale'];
+        $event->places_restantes=$data['jauge_maximale'];
 
         $event->user_id = Auth::id();
         // Event::create($validatedData);
         $event->save();
-        return $event ; 
+        return $event ;
 
 }
 }
