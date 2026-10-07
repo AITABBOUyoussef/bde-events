@@ -3,7 +3,7 @@ name: Build, Push to DockerHub & Deploy to Heroku
 on:
   push:
     branches:
-      - main # Bdilha ila knti kheddam b 'master'
+      - partStudent-api
 
 jobs:
   build-and-deploy:
@@ -12,7 +12,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      # 1. Login l Docker Hub w pushi l'image
+      # 1. Login w push l Docker Hub
       - name: Login to Docker Hub
         uses: docker/login-action@v2
         with:
@@ -26,7 +26,11 @@ jobs:
           push: true
           tags: ${{ secrets.DOCKER_USERNAME }}/bde-events-api:latest
 
-      # 2. Login l Heroku w pushi/deployi l'image
+      # 2. Installation dyal Heroku CLI 
+      - name: Install Heroku CLI
+        run: curl https://cli-assets.heroku.com/install.sh | sh
+
+      # 3. Login, Push, w Release f Heroku
       - name: Login to Heroku Container Registry
         env:
           HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
@@ -36,10 +40,11 @@ jobs:
         env:
           HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
           HEROKU_APP_NAME: ${{ secrets.HEROKU_APP_NAME }}
-        run: heroku container:push web -a $HEROKU_APP_NAME
+        run: heroku container:push web -a ${{ secrets.HEROKU_APP_NAME }}
 
       - name: Release Image in Heroku
         env:
           HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
           HEROKU_APP_NAME: ${{ secrets.HEROKU_APP_NAME }}
-        run: heroku container:release web -a $HEROKU_APP_NAME
+        run: heroku container:release web -a ${{ secrets.HEROKU_APP_NAME }}
+        
