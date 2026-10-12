@@ -13,11 +13,24 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-         User::create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
-            'password' => Hash::make('password'),
-            'role' => 'admin',
-        ]);
+        //  (Admin)
+        User::updateOrCreate(
+            ['email' => 'test@example.com'], 
+            [
+                'name' => 'Test User',
+                'password' => Hash::make('password'),
+                'role' => 'admin',
+            ]
+        );
+
+        // student
+        User::updateOrCreate(
+            ['email' => 'youssef@example.com'], 
+            [
+                'name' => 'Youssef Ait Abbou',
+                'password' => Hash::make('password'),
+                'role' => 'student', 
+            ]
+        );
     }
 }
